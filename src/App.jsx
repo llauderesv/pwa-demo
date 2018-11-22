@@ -1,5 +1,11 @@
 import React from 'react';
 
+import Incrementor from './containers/Incrementor';
+
 export default function App() {
-  return <h1 className="header-styles">Hello World</h1>;
+  return (
+    <div>
+      <Incrementor />
+    </div>
+  );
 }

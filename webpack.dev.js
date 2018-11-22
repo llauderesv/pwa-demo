@@ -12,8 +12,4 @@ module.exports = merge(common, {
     compress: true,
     historyApiFallback: true,
   },
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'public'),
-  },
 });

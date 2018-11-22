@@ -1,15 +1,26 @@
 /*eslint-disable */
 const HtmlWebpackPlugIn = require('html-webpack-plugin');
-const ExtractTextWebpack = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const devMode = process.env.NODE_ENV.trim() !== 'production';
 
-// const extractPlugIn = new ExtractTextWebpack({
-//   filename: devMode ? 'src/css/[name].css' : 'src/css/[name].[contenthash].css',
-//   allChunks: true,
-// });
+// Use the contenthash if the mode is set to production...
+const miniCssExtractPlugin = new MiniCssExtractPlugin({
+  filename: `styles/${devMode ? '[name].css' : '[name].[contenthash].css'}`,
+  chunkFilename: `styles/${devMode ? '[id].css' : '[id].[contenthash].css'}`,
+});
+
+// Use for css optimization...
+const optimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
+  assetNameRegExp: /\.css$/g,
+  cssProcessor: require('cssnano'),
+  cssProcessorPluginOptions: {
+    preset: ['default', { discardComments: { removeAll: true } }],
+  },
+  canPrint: true,
+});
 
 module.exports = {
   entry: {
@@ -48,18 +59,10 @@ module.exports = {
     ],
   },
   plugins: [
-    // extractPlugIn,
+    miniCssExtractPlugin,
+    optimizeCssAssetsPlugin,
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugIn({
-      template: 'src/index.html',
-    }),
-    new MiniCssExtractPlugin({
-      // Use the hashing of content file depending on the environtment...
-      filename: `styles/${devMode ? '[name].css' : '[name].[contenthash].css'}`,
-      chunkFilename: `styles/${
-        devMode ? '[id].css' : '[id].[contenthash].css'
-      }`,
-    }),
+    new HtmlWebpackPlugIn({ template: 'src/index.html' }),
   ],
   optimization: {
     runtimeChunk: 'single',
@@ -71,20 +74,10 @@ module.exports = {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          //   name(module) {
-          //     // get the name. E.g. node_modules/packageName/not/this/part.js
-          //     // or node_modules/packageName
-          //     const packageName = module.context.match(
-          //       /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-          //     )[1];
-
-          //     // npm package names are URL-safe, but some servers don't like @ symbols
-          //     return `npm.${packageName.replace('@', '')}`;
-          //   },
         },
         styles: {
           name: 'styles',
-          test: /\.(sc|c)ss$/,
+          test: /\.css$/,
           chunks: 'all',
           enforce: true,
         },
