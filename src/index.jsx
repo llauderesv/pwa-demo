@@ -1,18 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { increment } from './reducers/increment';
+import configureStore from './configureStore';
 
 import App from './App';
 
 import './styles/main.scss';
 
-const store = createStore(combineReducers({ increment }));
-
-store.subscribe(() => {
-  console.log(store.getState());
-});
+const store = configureStore();
 
 render(
   <Provider store={store}>
