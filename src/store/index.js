@@ -2,8 +2,8 @@
  * Put all the reducers here..
  */
 import { combineReducers } from 'redux';
-import { increment } from '../reducers/increment';
+import player from '../reducers/player';
 
-const store = combineReducers({ increment });
+const store = combineReducers({ player });
 
 export default store;

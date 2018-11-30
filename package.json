@@ -41,6 +41,7 @@
     "webpack-merge": "4.1.4"
   },
   "dependencies": {
+    "axios": "0.18.0",
     "node-uuid": "1.4.8",
     "react": "16.4.2",
     "react-dom": "16.4.2",

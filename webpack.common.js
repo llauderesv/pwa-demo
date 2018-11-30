@@ -4,12 +4,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const devMode = process.env.NODE_ENV.trim() !== 'production';
+const IsDevMode = process.env.NODE_ENV.trim() !== 'production';
 
 // Use the contenthash if the mode is set to production...
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
-  filename: `styles/${devMode ? '[name].css' : '[name].[contenthash].css'}`,
-  chunkFilename: `styles/${devMode ? '[id].css' : '[id].[contenthash].css'}`,
+  filename: `styles/${IsDevMode ? '[name].css' : '[name].[contenthash].css'}`,
+  chunkFilename: `styles/${IsDevMode ? '[id].css' : '[id].[contenthash].css'}`,
 });
 
 // Use for css optimization...
@@ -45,7 +45,7 @@ module.exports = {
       {
         test: /\.(sc|c)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          IsDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
