@@ -4,16 +4,20 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from './App';
 import Login from '../containers/Login';
+import MainPage from '../components/MainPage';
 
-export default function Root({ store }) {
+const Root = ({ store }) => {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
           <Route path="/" exact component={App} />
           <Route path="/login" exact component={Login} />
+          <Route path="/main" exact component={MainPage} />
         </Switch>
       </Router>
     </Provider>
   );
-}
+};
+
+export default Root;

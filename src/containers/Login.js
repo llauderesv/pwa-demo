@@ -1,12 +1,16 @@
 import { connect } from 'react-redux';
-import { login } from '../actions/player';
 
 import Login from '../components/Login';
 
-const mapStateToProps = state => ({
-  isLoading: state.player.isLoading,
-  errorMessage: state.player.errorMessage,
-});
+const mapStateToProps = state => {
+  const { isLoading, errorMessage, isLoggedIn } = state.player;
+
+  return {
+    isLoading: isLoading,
+    errorMessage: errorMessage,
+    isLoggedIn: isLoggedIn,
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   onClick(username, password) {
@@ -14,9 +18,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const LoginContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
-
-export default LoginContainer;
