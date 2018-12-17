@@ -6,6 +6,8 @@ import App from './App';
 import Login from '../containers/Login';
 import MainPage from '../components/MainPage';
 
+import '../styles/bootstrap.scss';
+
 const Root = ({ store }) => {
   return (
     <Provider store={store}>

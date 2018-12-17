@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const App = _ => {
+const App = () => {
   return (
     <div className="jumbotron">
       <h3 className="display-3">PWA Demo</h3>

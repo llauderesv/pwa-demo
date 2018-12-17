@@ -1,34 +1,40 @@
 import { delay } from 'redux-saga';
 import { put, takeEvery, all, takeLatest } from 'redux-saga/effects';
 
+function* watchUsersLogin() {
+  yield takeLatest('LOGIN_USER', loginUserAsync);
+}
+
 function* loginUserAsync() {
-  // create and yield a dispatch Effect
+  // put some 3 sec. delay before dispatching another action
+  // yield put({
+  //   type: 'FETCH_ACCESS_TOKEN_SUCCESS',
+  //   payload: {
+  //     isLoading: false,
+  //     isLoggedIn: true,
+  //   },
+  // });
   yield put({
     type: 'FETCH_ACCESS_TOKEN_REQUEST',
     payload: {
       isLoading: true,
     },
   });
-  // put some 3 sec. delay before dispatching another action
   yield delay(3000);
   yield put({
-    type: 'FETCH_ACCESS_TOKEN_SUCCESS',
+    type: 'FETCH_ACCESS_TOKEN_FAILED',
     payload: {
       isLoading: false,
-      isLoggedIn: true,
+      message: 'Something went wrong',
     },
   });
-  // yield put({
-  //   type: 'FETCH_ACCESS_TOKEN_FAILED',
-  //   payload: {
-  //     isLoading: false,
-  //     message: 'Something went wrong',
-  //   },
-  // });
-}
-
-function* watchUsersLogin() {
-  yield takeLatest('LOGIN_USER', loginUserAsync);
+  yield put({
+    type: 'SHOW_ALERT',
+    payload: {
+      show: true,
+      type: 'danger',
+    },
+  });
 }
 
 export default function* rootSaga() {

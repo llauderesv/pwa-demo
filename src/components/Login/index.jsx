@@ -3,11 +3,11 @@ import { Redirect } from 'react-router';
 
 import TextField from '../TextField';
 import Button from '../Button';
-import Alert from '../Alert';
+import Alert from '../../containers/Alert';
 
 import './index.scss';
 
-const Login = ({ onClick, isLoading, isLoggedIn, errorMessage }) => {
+const Login = ({ isLoading, isLoggedIn, onClick, alertState }) => {
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
 
@@ -23,7 +23,7 @@ const Login = ({ onClick, isLoading, isLoggedIn, errorMessage }) => {
         </div>
       </div>
       <div className="login-container">
-        {errorMessage && <Alert>{errorMessage}</Alert>}
+        {alertState && <Alert />}
         <form>
           <fieldset>
             <legend>Sign In</legend>

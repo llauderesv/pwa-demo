@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import Login from '../components/Login';
 
 const mapStateToProps = state => {
-  const { isLoading, errorMessage, isLoggedIn } = state.player;
+  const { isLoading, message, isLoggedIn } = state.player;
+  const { show } = state.alert;
 
   return {
-    isLoading: isLoading,
-    errorMessage: errorMessage,
-    isLoggedIn: isLoggedIn,
+    isLoading,
+    isLoggedIn,
+    message,
+    alertState: show,
   };
 };
 

@@ -1,7 +1,7 @@
 const defaultPlayerState = {
   isLoggedIn: false,
   isLoading: false,
-  errorMessage: null,
+  message: null,
 };
 
 const player = (state = defaultPlayerState, action) => {
@@ -21,7 +21,7 @@ const player = (state = defaultPlayerState, action) => {
       return {
         ...state,
         isLoading: action.payload.isLoading,
-        errorMessage: action.payload.message,
+        message: action.payload.message,
       };
     default:
       return state;

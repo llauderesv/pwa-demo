@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Alert = ({ children }) => {
+const Alert = ({ message, type, onClick }) => {
   return (
-    <div className="alert alert-dismissible alert-danger">
-      <button type="button" className="close" data-dismiss="alert">
+    <div className={`alert alert-${type}`}>
+      <button onClick={onClick} type="button" className="close">
         &times;
       </button>
-      {children}
+      {message}
     </div>
   );
 };
