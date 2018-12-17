@@ -4,18 +4,9 @@ const HtmlWebpackPlugIn = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WorkBoxPlugin = require('workbox-webpack-plugin');
 
 const IsDevMode = process.env.NODE_ENV.trim() !== 'production';
-
-const miniCssExtractPlugin = new MiniCssExtractPlugin({
-  filename: `styles/${IsDevMode ? '[name].css' : '[name].[contenthash].css'}`,
-  chunkFilename: `styles/${IsDevMode ? '[id].css' : '[id].[contenthash].css'}`,
-});
-
-// CSS optimization and minification...
-const optimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({});
-const cleanWebpackPlugin = new CleanWebpackPlugin(['dist']);
-const htmlWebpackPlugIn = new HtmlWebpackPlugIn({ template: 'src/index.html' });
 
 module.exports = {
   entry: {
@@ -25,10 +16,21 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    miniCssExtractPlugin,
-    optimizeCssAssetsPlugin,
-    cleanWebpackPlugin,
-    htmlWebpackPlugIn,
+    new MiniCssExtractPlugin({
+      filename: `styles/${
+        IsDevMode ? '[name].css' : '[name].[contenthash].css'
+      }`,
+      chunkFilename: `styles/${
+        IsDevMode ? '[id].css' : '[id].[contenthash].css'
+      }`,
+    }),
+    // CSS optimization and minification...
+    new OptimizeCssAssetsPlugin({}),
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugIn({ template: 'src/index.html' }),
+    new WorkBoxPlugin.InjectManifest({
+      swSrc: path.resolve(__dirname, 'src', 'serviceWorker.js'),
+    }),
   ],
   optimization: {
     splitChunks: {
