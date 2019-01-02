@@ -1,0 +1,6 @@
+@mixin opacity($value) {
+  -webkit-transition: opacity $value ease-in-out;
+  -moz-transition: opacity $value ease-in-out;
+  -ms-transition: opacity $value ease-in-out;
+  -o-transition: opacity $value ease-in-out;
+}

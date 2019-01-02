@@ -1,38 +1,35 @@
 import React from 'react';
+import Button from '../Button';
+import { getTokenItem, removeItem } from '../../localStorage';
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">
-        News
+        Todo
       </a>
       <button
         className="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarColor01"
-        aria-controls="navbarColor01"
+        data-target="#navbarColor03"
+        aria-controls="navbarColor03"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon" />
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarColor01">
+      <div className="collapse navbar-collapse" id="navbarColor03">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="nav-link" href="#">
-              Home <span className="sr-only">(current)</span>
+              Feed <span className="sr-only">(current)</span>
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Features
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Pricing
+              Profile
             </a>
           </li>
           <li className="nav-item">
@@ -40,6 +37,19 @@ const Header = () => {
               About
             </a>
           </li>
+          {getTokenItem() && (
+            <li className="nav-item">
+              <Button
+                className="nav-link"
+                onClick={() => {
+                  removeItem('token');
+                  window.location.href = '/';
+                }}
+              >
+                Sign Out
+              </Button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

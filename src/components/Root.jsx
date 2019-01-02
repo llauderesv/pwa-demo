@@ -2,11 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import withAuthorizationRoute from './AuthorizationRoute';
 import App from './App';
-import Login from '../containers/Login';
-import MainPage from '../components/MainPage';
+import TodoApp from './TodoApp';
+import SignUp from './SignUp';
 
-import '../styles/bootstrap.scss';
+import '../assets/styles/bootstrap.scss';
+import '../assets/styles/main.scss';
 
 const Root = ({ store }) => {
   return (
@@ -14,8 +16,12 @@ const Root = ({ store }) => {
       <Router>
         <Switch>
           <Route path="/" exact component={App} />
-          {/* <Route path="/login" exact component={Login} />
-          <Route path="/main" exact component={MainPage} /> */}
+          <Route path="/sign-up" exact component={SignUp} />
+          <Route
+            path="/todo"
+            exact
+            render={() => withAuthorizationRoute(TodoApp)}
+          />
         </Switch>
       </Router>
     </Provider>

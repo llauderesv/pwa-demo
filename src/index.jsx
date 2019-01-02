@@ -1,19 +1,18 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import configureStore from './configureStore';
 
 import Root from './components/Root';
 
 const store = configureStore();
+const root = document.getElementById('root');
 
 // Check if service works is available in the browsers...
-if ('serviceWorker' in navigator) {
-  // Use the window load event to keep the page load performant
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/serviceWorker.js').then(registration => {
-      registration.pushManager.subscribe({ userVisibleOnly: true });
-    });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   // Load service workers
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/serviceWorker.js');
+//   });
+// }
 
-render(<Root store={store} />, document.getElementById('root'));
+ReactDOM.render(<Root store={store} />, root);

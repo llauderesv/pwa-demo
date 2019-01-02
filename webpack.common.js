@@ -4,9 +4,28 @@ const HtmlWebpackPlugIn = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const WorkBoxPlugin = require('workbox-webpack-plugin');
 
 const IsDevMode = process.env.NODE_ENV.trim() !== 'production';
+
+const pwaManifest = {
+  name: 'PWA Demo',
+  short_name: 'PWADemo',
+  description: 'This is a sample PWA Demo',
+  background_color: '#CCC',
+  crossorigin: null, //can be null, use-credentials or anonymous
+  icons: [
+    {
+      src: path.resolve(__dirname, 'src/assets/images/icon-192.png'),
+      sizes: 192,
+    },
+    {
+      src: path.resolve(__dirname, 'src/assets/images/icon-512.png'),
+      sizes: 512,
+    },
+  ],
+};
 
 module.exports = {
   entry: {
@@ -17,20 +36,16 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `styles/${
-        IsDevMode ? '[name].css' : '[name].[contenthash].css'
-      }`,
-      chunkFilename: `styles/${
-        IsDevMode ? '[id].css' : '[id].[contenthash].css'
-      }`,
+      filename: `styles/${IsDevMode ? '[name].css' : '[name].[contenthash].css'}`,
+      chunkFilename: `styles/${IsDevMode ? '[id].css' : '[id].[contenthash].css'}`,
     }),
-    // CSS optimization and minification...
     new OptimizeCssAssetsPlugin({}),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugIn({ template: 'src/index.html' }),
-    new WorkBoxPlugin.InjectManifest({
-      swSrc: path.resolve(__dirname, 'src', 'serviceWorker.js'),
-    }),
+    // new WorkBoxPlugin.InjectManifest({
+    //   swSrc: path.resolve(__dirname, 'src', 'serviceWorker.js'),
+    // }),
+    new WebpackPwaManifest(pwaManifest),
   ],
   optimization: {
     splitChunks: {
@@ -76,6 +91,14 @@ module.exports = {
         test: /\.html$/,
         use: {
           loader: 'html-loader',
+        },
+      },
+      {
+        test: /\.(gif|png|jpg|jpeg|svg)$/i,
+        loader: 'file-loader',
+        options: {
+          name: IsDevMode ? '[name].[ext]' : '[name].[hash].[ext]',
+          outputPath: 'assets/images',
         },
       },
     ],

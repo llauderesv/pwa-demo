@@ -1,0 +1,16 @@
+@import '../../assets/styles/partials/opacity';
+
+p {
+  margin-bottom: 0 !important;
+}
+
+.connection-state-container.hide-opacity {
+  opacity: 0;
+}
+
+.connection-state-container {
+  color: #ffffff;
+  text-align: center;
+  @include opacity(3s);
+  opacity: 1;
+}

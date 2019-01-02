@@ -1,24 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import SignIn from '../containers/SignIn';
+import Header from './Header';
+import withConnectionState from './ConnectionState';
+
 const App = () => {
   return (
-    <div className="jumbotron">
-      <h3 className="display-3">PWA Demo</h3>
-      <p className="lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur
-      </p>
-      <p className="lead">
-        <Link className="btn btn-lg btn-primary" to="/login">
-          Click here to Sign In
-        </Link>
-      </p>
-    </div>
+    <React.Fragment>
+      <Header />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="jumbotron">
+              <h3 className="display-2">Todo</h3>
+              <h3 className="display-5">Your personalize Task management</h3>
+              <br />
+              <p className="lead">
+                Don't have an account?{' '}
+                <strong>
+                  <Link to="/sign-up">Sign Up</Link>
+                </strong>{' '}
+                here.
+              </p>
+            </div>
+          </div>
+
+          <div className="col-md-6">
+            <SignIn />
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
   );
 };
 
-export default App;
+export default withConnectionState(App);

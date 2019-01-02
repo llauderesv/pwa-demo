@@ -20,7 +20,7 @@ export default function configureStore() {
   const store = createStore(myStore, applyMiddleware(...middlewares));
 
   // Apply the saga middleware
-  sagaMiddleware.run(rootSaga); 
+  sagaMiddleware.run(rootSaga);
 
   return store;
 }

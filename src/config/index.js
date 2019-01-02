@@ -1,7 +1,6 @@
-import axios from 'axios';
+const app = {
+  baseURL: 'http://localhost:3000/',
+  apiBaseURL: 'https://localhost:3001/',
+};
 
-const API_KEY = 'e9e719462ac34df0a024d71fff0989ad';
-
-export default axios.create({
-  headers: { Authorization: `Bearer ${API_KEY}` },
-});
+export default app;

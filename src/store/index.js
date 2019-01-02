@@ -3,9 +3,9 @@
  */
 import { combineReducers } from 'redux';
 
-import player from '../reducers/player';
-import alert from '../reducers/alert';
+import todos from '../reducers/todos';
+import signIn from '../reducers/signIn';
 
-const store = combineReducers({ player, alert });
+const store = combineReducers({ signIn, todos });
 
 export default store;
