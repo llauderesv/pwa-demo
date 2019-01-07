@@ -1,12 +1,14 @@
 import React from 'react';
 
-const Alert = ({ message, alertType, onClick, ...props }) => {
+const Alert = ({ children, className, onClick, ...props }) => {
+  const classNames = ['alert', className].join(' ');
+
   return (
-    <div className={`alert alert-${alertType}`} {...props}>
+    <div className={classNames} {...props}>
       <button onClick={onClick} type="button" className="close">
         &times;
       </button>
-      <p className="mb-0">{message}</p>
+      {children}
     </div>
   );
 };

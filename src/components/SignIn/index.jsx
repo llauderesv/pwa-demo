@@ -28,15 +28,16 @@ const SignIn = ({
     if (!emailValue || !passwordValue) return true;
     return false;
   }
-
+  console.log(showAlert);
   return (
     <div className="sign-in-form">
       <Alert
         style={{ display: !showAlert ? 'none' : 'block' }}
-        alertType={alertType}
-        message={message}
+        className={`alert-${alertType}`}
         onClick={handleHideAlert}
-      />
+      >
+        <p className="mb-0">{message}</p>
+      </Alert>
       <h4 className="display-3">Sign In</h4>
       <form onSubmit={onSubmitSignInForm}>
         <div className="form-group">

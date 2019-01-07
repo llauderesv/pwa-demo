@@ -46,6 +46,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "react": "16.7.0-alpha.2",
+    "react-addons-css-transition-group": "15.6.2",
     "react-dom": "16.7.0-alpha.2",
     "react-redux": "5.0.7",
     "react-router": "4.3.1",
