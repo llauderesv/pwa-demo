@@ -10,14 +10,14 @@ import rootSaga from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore() {
-  const middlewares = [sagaMiddleware];
+  const middleWares = [sagaMiddleware];
   const env = process.env.NODE_ENV.trim();
 
   if (env !== 'production') {
-    middlewares.push(createLogger());
+    middleWares.push(createLogger());
   }
 
-  const store = createStore(myStore, applyMiddleware(...middlewares));
+  const store = createStore(myStore, applyMiddleware(...middleWares));
 
   // Apply the saga middleware
   sagaMiddleware.run(rootSaga);

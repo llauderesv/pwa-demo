@@ -1,5 +1,5 @@
 /**
- * Put all the reducers here..
+ * Place all reducers here..
  */
 import { combineReducers } from 'redux';
 

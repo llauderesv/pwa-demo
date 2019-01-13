@@ -28,7 +28,7 @@ const SignIn = ({
     if (!emailValue || !passwordValue) return true;
     return false;
   }
-  console.log(showAlert);
+
   return (
     <div className="sign-in-form">
       <Alert
